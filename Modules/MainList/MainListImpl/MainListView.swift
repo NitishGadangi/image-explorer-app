@@ -3,8 +3,13 @@ import MainListInterface
 import CommonUIComponents
 
 struct MainListView: View {
-    @ObservedObject var viewModel: MainListViewModel
+    @StateObject var viewModel: MainListViewModel
     let imageCache: ImageCache
+
+    init(viewModel: MainListViewModel, imageCache: ImageCache) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+        self.imageCache = imageCache
+    }
 
     var body: some View {
         ZStack {
@@ -12,6 +17,8 @@ struct MainListView: View {
                 ProgressView("Loading products...")
             } else if let error = viewModel.errorMessage, viewModel.products.isEmpty {
                 errorView(message: error)
+            } else if !viewModel.searchText.isEmpty && viewModel.filteredProducts.isEmpty {
+                ContentUnavailableView.search(text: viewModel.searchText)
             } else {
                 productList
             }

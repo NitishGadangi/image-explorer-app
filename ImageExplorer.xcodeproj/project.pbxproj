@@ -6,8 +6,20 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5EB1E4742F7D2A82001A956C /* CentralRouter in Frameworks */ = {isa = PBXBuildFile; productRef = 5EB1E4732F7D2A82001A956C /* CentralRouter */; };
+		5EB1E4762F7D2A82001A956C /* CommonUIComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 5EB1E4752F7D2A82001A956C /* CommonUIComponents */; };
+		5EB1E4782F7D2A82001A956C /* DetailImpl in Frameworks */ = {isa = PBXBuildFile; productRef = 5EB1E4772F7D2A82001A956C /* DetailImpl */; };
+		5EB1E47A2F7D2A82001A956C /* DetailInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 5EB1E4792F7D2A82001A956C /* DetailInterface */; };
+		5EB1E47C2F7D2A82001A956C /* MainListImpl in Frameworks */ = {isa = PBXBuildFile; productRef = 5EB1E47B2F7D2A82001A956C /* MainListImpl */; };
+		5EB1E47E2F7D2A82001A956C /* MainListInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 5EB1E47D2F7D2A82001A956C /* MainListInterface */; };
+		5EB1E4802F7D2A82001A956C /* NetworkLib in Frameworks */ = {isa = PBXBuildFile; productRef = 5EB1E47F2F7D2A82001A956C /* NetworkLib */; };
+		5EB1E4822F7D2A82001A956C /* PersistenceLib in Frameworks */ = {isa = PBXBuildFile; productRef = 5EB1E4812F7D2A82001A956C /* PersistenceLib */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		5EB1E45D2F7D2341001A956C /* ImageExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EB1E4712F7D2A26001A956C /* Modules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Modules; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -23,6 +35,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EB1E4782F7D2A82001A956C /* DetailImpl in Frameworks */,
+				5EB1E4802F7D2A82001A956C /* NetworkLib in Frameworks */,
+				5EB1E4822F7D2A82001A956C /* PersistenceLib in Frameworks */,
+				5EB1E4742F7D2A82001A956C /* CentralRouter in Frameworks */,
+				5EB1E4762F7D2A82001A956C /* CommonUIComponents in Frameworks */,
+				5EB1E47E2F7D2A82001A956C /* MainListInterface in Frameworks */,
+				5EB1E47C2F7D2A82001A956C /* MainListImpl in Frameworks */,
+				5EB1E47A2F7D2A82001A956C /* DetailInterface in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +52,7 @@
 		5EB1E4542F7D2341001A956C = {
 			isa = PBXGroup;
 			children = (
+				5EB1E4712F7D2A26001A956C /* Modules */,
 				5EB1E45F2F7D2341001A956C /* ImageExplorer */,
 				5EB1E45E2F7D2341001A956C /* Products */,
 			);
@@ -65,6 +86,14 @@
 			);
 			name = ImageExplorer;
 			packageProductDependencies = (
+				5EB1E4732F7D2A82001A956C /* CentralRouter */,
+				5EB1E4752F7D2A82001A956C /* CommonUIComponents */,
+				5EB1E4772F7D2A82001A956C /* DetailImpl */,
+				5EB1E4792F7D2A82001A956C /* DetailInterface */,
+				5EB1E47B2F7D2A82001A956C /* MainListImpl */,
+				5EB1E47D2F7D2A82001A956C /* MainListInterface */,
+				5EB1E47F2F7D2A82001A956C /* NetworkLib */,
+				5EB1E4812F7D2A82001A956C /* PersistenceLib */,
 			);
 			productName = ImageExplorer;
 			productReference = 5EB1E45D2F7D2341001A956C /* ImageExplorer.app */;
@@ -94,6 +123,9 @@
 			);
 			mainGroup = 5EB1E4542F7D2341001A956C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5EB1E4722F7D2A82001A956C /* XCLocalSwiftPackageReference "Modules" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5EB1E45E2F7D2341001A956C /* Products */;
 			projectDirPath = "";
@@ -332,6 +364,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		5EB1E4722F7D2A82001A956C /* XCLocalSwiftPackageReference "Modules" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Modules;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5EB1E4732F7D2A82001A956C /* CentralRouter */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CentralRouter;
+		};
+		5EB1E4752F7D2A82001A956C /* CommonUIComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonUIComponents;
+		};
+		5EB1E4772F7D2A82001A956C /* DetailImpl */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DetailImpl;
+		};
+		5EB1E4792F7D2A82001A956C /* DetailInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DetailInterface;
+		};
+		5EB1E47B2F7D2A82001A956C /* MainListImpl */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MainListImpl;
+		};
+		5EB1E47D2F7D2A82001A956C /* MainListInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MainListInterface;
+		};
+		5EB1E47F2F7D2A82001A956C /* NetworkLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetworkLib;
+		};
+		5EB1E4812F7D2A82001A956C /* PersistenceLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PersistenceLib;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5EB1E4552F7D2341001A956C /* Project object */;
 }

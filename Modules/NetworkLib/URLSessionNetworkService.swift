@@ -25,10 +25,11 @@ public final class URLSessionNetworkService: NetworkService, @unchecked Sendable
             throw NetworkError.invalidURL
         }
         urlRequest.timeoutInterval = configuration.timeout
+        let request = urlRequest
 
         return try await retryHandler.perform(
             shouldRetry: { Self.isRetryable($0) },
-            operation: { try await self.performRequest(urlRequest) }
+            operation: { try await self.performRequest(request) }
         )
     }
 

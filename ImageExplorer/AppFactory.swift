@@ -7,8 +7,14 @@ import DetailImpl
 import CentralRouter
 
 @MainActor
-enum AppFactory {
-    static func makeRootView() -> some View {
+final class AppFactory {
+    static let shared = AppFactory()
+
+    private var router: AppRouter?
+
+    private init() {}
+
+    func makeRootView() -> some View {
         let networkService = URLSessionNetworkService(
             configuration: NetworkConfiguration(
                 timeout: 30,
@@ -21,31 +27,22 @@ enum AppFactory {
             store: UserDefaultsDataStore(suiteName: "com.imageexplorer.cache")
         )
 
-        // Router needs to be created after coordinators, but coordinators need router reference
-        // Using a class wrapper to break the circular dependency
-        let routerHolder = RouterHolder()
-
         let mainListCoordinator = DefaultMainListCoordinator(
             networkService: networkService,
             persistenceService: persistenceService,
-            onProductSelected: { product in
-                routerHolder.router?.push(.detail(product))
+            onProductSelected: { [weak self] product in
+                self?.router?.push(.detail(product))
             }
         )
 
         let detailCoordinator = DefaultDetailCoordinator()
 
-        let router = AppRouter(
+        let appRouter = AppRouter(
             mainListCoordinator: mainListCoordinator,
             detailCoordinator: detailCoordinator
         )
-        routerHolder.router = router
+        router = appRouter
 
-        return RootCoordinatorView(router: router)
+        return RootCoordinatorView(router: appRouter)
     }
-}
-
-@MainActor
-private final class RouterHolder {
-    var router: AppRouter?
 }

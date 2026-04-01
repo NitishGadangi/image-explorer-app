@@ -11,7 +11,7 @@ import SwiftUI
 struct ImageExplorerApp: App {
     var body: some Scene {
         WindowGroup {
-            AppFactory.makeRootView()
+            AppFactory.shared.makeRootView()
         }
     }
 }

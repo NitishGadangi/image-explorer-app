@@ -1,5 +1,7 @@
 import SwiftUI
 import MainListInterface
+import NetworkLib
+import PersistenceLib
 import CommonUIComponents
 
 struct MainListView: View {
@@ -74,5 +76,60 @@ struct MainListView: View {
             .buttonStyle(.borderedProminent)
         }
         .padding()
+    }
+}
+
+// MARK: - Preview
+
+private final class PreviewNetworkService: NetworkService, @unchecked Sendable {
+    var configuration = NetworkConfiguration()
+    func request<T: Decodable & Sendable>(endpoint: Endpoint) async throws -> T {
+        throw NetworkError.noInternet
+    }
+}
+
+private final class PreviewPersistenceService: PersistenceService, @unchecked Sendable {
+    func save<T: Encodable>(_ object: T, forKey key: String) throws {}
+    func load<T: Decodable>(forKey key: String) throws -> T? { nil }
+    func delete(forKey key: String) throws {}
+    func exists(forKey key: String) -> Bool { false }
+}
+
+#Preview("With Products") {
+    let vm = MainListViewModel(
+        networkService: PreviewNetworkService(),
+        persistenceService: PreviewPersistenceService(),
+        onProductSelected: { _ in }
+    )
+    vm.products = Product.previewList
+
+    return NavigationStack {
+        MainListView(viewModel: vm, imageCache: PreviewImageCache())
+    }
+}
+
+#Preview("Loading") {
+    let vm = MainListViewModel(
+        networkService: PreviewNetworkService(),
+        persistenceService: PreviewPersistenceService(),
+        onProductSelected: { _ in }
+    )
+    vm.isLoading = true
+
+    return NavigationStack {
+        MainListView(viewModel: vm, imageCache: PreviewImageCache())
+    }
+}
+
+#Preview("Error State") {
+    let vm = MainListViewModel(
+        networkService: PreviewNetworkService(),
+        persistenceService: PreviewPersistenceService(),
+        onProductSelected: { _ in }
+    )
+    vm.errorMessage = "No internet connection"
+
+    return NavigationStack {
+        MainListView(viewModel: vm, imageCache: PreviewImageCache())
     }
 }

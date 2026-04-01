@@ -24,3 +24,20 @@ struct ProductRowView: View {
         .padding(.vertical, 4)
     }
 }
+
+#Preview {
+    List {
+        ProductRowView(
+            product: .preview,
+            imageCache: PreviewImageCache()
+        )
+        ProductRowView(
+            product: Product(
+                team: 1, title: "A product with a longer title to test line wrapping",
+                description: nil, thumbnail: nil, image: nil
+            ),
+            imageCache: PreviewImageCache()
+        )
+    }
+    .listStyle(.plain)
+}

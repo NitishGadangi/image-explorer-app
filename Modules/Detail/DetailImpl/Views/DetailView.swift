@@ -38,3 +38,28 @@ struct DetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+
+#Preview {
+    NavigationStack {
+        DetailView(
+            viewModel: DetailViewModel(product: .preview),
+            imageCache: PreviewImageCache()
+        )
+    }
+}
+
+#Preview("No Description") {
+    NavigationStack {
+        DetailView(
+            viewModel: DetailViewModel(
+                product: Product(
+                    team: 1, title: "Simple Product",
+                    description: nil,
+                    thumbnail: "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+                    image: nil
+                )
+            ),
+            imageCache: PreviewImageCache()
+        )
+    }
+}

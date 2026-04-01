@@ -78,6 +78,24 @@ public struct Product: Codable, Identifiable, Hashable, Sendable {
     }
 }
 
+// MARK: - Preview Helpers
+
+public extension Product {
+    static let preview = Product(
+        team: 1,
+        title: "iPhone 15 Pro",
+        description: "The most powerful iPhone ever with A17 Pro chip and titanium design.",
+        thumbnail: "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+        image: "https://cdn.dummyjson.com/product-images/1/1.jpg"
+    )
+
+    static let previewList: [Product] = [
+        .preview,
+        Product(team: 1, title: "MacBook Air", description: "Supercharged by M2 chip.", thumbnail: "https://cdn.dummyjson.com/product-images/6/thumbnail.png", image: "https://cdn.dummyjson.com/product-images/6/1.png"),
+        Product(team: 2, title: "Samsung Galaxy S23", description: "Epic camera, nightography.", thumbnail: "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg", image: "https://cdn.dummyjson.com/product-images/3/1.jpg"),
+    ]
+}
+
 public struct ProductsResponse: Codable, Sendable {
     public let products: [Product?]
 

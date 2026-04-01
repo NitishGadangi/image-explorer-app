@@ -35,3 +35,27 @@ public struct RemoteImageView<Placeholder: View>: View {
         }
     }
 }
+
+#Preview("With URL") {
+    RemoteImageView(
+        url: URL(string: "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"),
+        cache: PreviewImageCache()
+    ) {
+        Image(systemName: "photo")
+            .foregroundStyle(.secondary)
+    }
+    .frame(width: 120, height: 120)
+    .clipShape(RoundedRectangle(cornerRadius: 12))
+}
+
+#Preview("No URL") {
+    RemoteImageView(
+        url: nil,
+        cache: PreviewImageCache()
+    ) {
+        Image(systemName: "photo")
+            .foregroundStyle(.secondary)
+    }
+    .frame(width: 120, height: 120)
+    .clipShape(RoundedRectangle(cornerRadius: 12))
+}

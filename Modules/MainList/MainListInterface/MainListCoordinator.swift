@@ -1,5 +1,5 @@
 import SwiftUI
 
-public protocol MainListFactory {
+public protocol MainListCoordinator {
     @MainActor func makeMainListView() -> AnyView
 }

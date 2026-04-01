@@ -4,11 +4,10 @@ import CommonUIComponents
 
 struct ProductRowView: View {
     let product: Product
-    let imageCache: ImageCache
 
     var body: some View {
         HStack(spacing: 12) {
-            RemoteImageView(url: product.displayThumbnailURL, cache: imageCache) {
+            RemoteImageView(url: product.displayThumbnailURL) {
                 Image(systemName: "photo")
                     .foregroundStyle(.secondary)
             }
@@ -27,16 +26,12 @@ struct ProductRowView: View {
 
 #Preview {
     List {
-        ProductRowView(
-            product: .preview,
-            imageCache: PreviewImageCache()
-        )
+        ProductRowView(product: .preview)
         ProductRowView(
             product: Product(
                 team: 1, title: "A product with a longer title to test line wrapping",
                 description: nil, thumbnail: nil, image: nil
-            ),
-            imageCache: PreviewImageCache()
+            )
         )
     }
     .listStyle(.plain)

@@ -1,6 +1,15 @@
 import UIKit
 
 public final class TwoTierImageCache: ImageCache, @unchecked Sendable {
+    public static let shared = TwoTierImageCache(
+        memory: InMemoryImageCache(
+            config: ImageCacheConfiguration(maxItemCount: 50, maxTotalSizeBytes: 25_000_000)
+        ),
+        persistent: PersistentImageCache(
+            config: ImageCacheConfiguration(maxItemCount: 200, maxTotalSizeBytes: 100_000_000)
+        )
+    )
+
     private let memory: ImageCache
     private let persistent: ImageCache
 

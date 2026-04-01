@@ -4,12 +4,11 @@ import CommonUIComponents
 
 struct DetailView: View {
     @ObservedObject var viewModel: DetailViewModel
-    let imageCache: ImageCache
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                RemoteImageView(url: viewModel.imageURL, cache: imageCache) {
+                RemoteImageView(url: viewModel.imageURL) {
                     Image(systemName: "photo")
                         .font(.largeTitle)
                         .foregroundStyle(.secondary)
@@ -41,10 +40,7 @@ struct DetailView: View {
 
 #Preview {
     NavigationStack {
-        DetailView(
-            viewModel: DetailViewModel(product: .preview),
-            imageCache: PreviewImageCache()
-        )
+        DetailView(viewModel: DetailViewModel(product: .preview))
     }
 }
 
@@ -58,8 +54,7 @@ struct DetailView: View {
                     thumbnail: "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
                     image: nil
                 )
-            ),
-            imageCache: PreviewImageCache()
+            )
         )
     }
 }

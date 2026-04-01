@@ -6,11 +6,9 @@ import CommonUIComponents
 
 struct MainListView: View {
     @StateObject var viewModel: MainListViewModel
-    let imageCache: ImageCache
 
-    init(viewModel: MainListViewModel, imageCache: ImageCache) {
+    init(viewModel: MainListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        self.imageCache = imageCache
     }
 
     var body: some View {
@@ -50,7 +48,7 @@ struct MainListView: View {
 
     private var productList: some View {
         List(viewModel.filteredProducts) { product in
-            ProductRowView(product: product, imageCache: imageCache)
+            ProductRowView(product: product)
                 .contentShape(Rectangle())
                 .onTapGesture {
                     viewModel.selectProduct(product)
@@ -104,7 +102,7 @@ private final class PreviewPersistenceService: PersistenceService, @unchecked Se
     vm.products = Product.previewList
 
     return NavigationStack {
-        MainListView(viewModel: vm, imageCache: PreviewImageCache())
+        MainListView(viewModel: vm)
     }
 }
 
@@ -117,7 +115,7 @@ private final class PreviewPersistenceService: PersistenceService, @unchecked Se
     vm.isLoading = true
 
     return NavigationStack {
-        MainListView(viewModel: vm, imageCache: PreviewImageCache())
+        MainListView(viewModel: vm)
     }
 }
 
@@ -130,6 +128,6 @@ private final class PreviewPersistenceService: PersistenceService, @unchecked Se
     vm.errorMessage = "No internet connection"
 
     return NavigationStack {
-        MainListView(viewModel: vm, imageCache: PreviewImageCache())
+        MainListView(viewModel: vm)
     }
 }

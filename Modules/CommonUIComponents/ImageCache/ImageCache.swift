@@ -6,3 +6,7 @@ public protocol ImageCache: Sendable {
     func remove(forKey key: String) async
     func clearAll() async
 }
+
+public extension ImageCache where Self == TwoTierImageCache {
+    static var shared: TwoTierImageCache { .shared }
+}

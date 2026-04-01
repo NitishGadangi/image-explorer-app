@@ -6,15 +6,15 @@ import DetailInterface
 public final class AppRouter: ObservableObject {
     @Published public var path = NavigationPath()
 
-    private let mainListFactory: MainListFactory
-    private let detailFactory: DetailFactory
+    private let mainListCoordinator: MainListCoordinator
+    private let detailCoordinator: DetailCoordinator
 
     public init(
-        mainListFactory: MainListFactory,
-        detailFactory: DetailFactory
+        mainListCoordinator: MainListCoordinator,
+        detailCoordinator: DetailCoordinator
     ) {
-        self.mainListFactory = mainListFactory
-        self.detailFactory = detailFactory
+        self.mainListCoordinator = mainListCoordinator
+        self.detailCoordinator = detailCoordinator
     }
 
     public func push(_ route: Route) {
@@ -28,14 +28,14 @@ public final class AppRouter: ObservableObject {
 
     @ViewBuilder
     public func rootView() -> some View {
-        mainListFactory.makeMainListView()
+        mainListCoordinator.makeMainListView()
     }
 
     @ViewBuilder
     public func view(for route: Route) -> some View {
         switch route {
         case .detail(let product):
-            detailFactory.makeDetailView(for: product)
+            detailCoordinator.makeDetailView(for: product)
         }
     }
 }

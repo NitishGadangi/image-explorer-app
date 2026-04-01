@@ -9,7 +9,7 @@ public struct RemoteImageView<Placeholder: View>: View {
 
     public init(
         url: URL?,
-        cache: ImageCache,
+        cache: ImageCache = .shared,
         @ViewBuilder placeholder: @escaping () -> Placeholder
     ) {
         self.url = url
@@ -38,8 +38,7 @@ public struct RemoteImageView<Placeholder: View>: View {
 
 #Preview("With URL") {
     RemoteImageView(
-        url: URL(string: "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"),
-        cache: PreviewImageCache()
+        url: URL(string: "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg")
     ) {
         Image(systemName: "photo")
             .foregroundStyle(.secondary)
@@ -49,10 +48,7 @@ public struct RemoteImageView<Placeholder: View>: View {
 }
 
 #Preview("No URL") {
-    RemoteImageView(
-        url: nil,
-        cache: PreviewImageCache()
-    ) {
+    RemoteImageView(url: nil) {
         Image(systemName: "photo")
             .foregroundStyle(.secondary)
     }

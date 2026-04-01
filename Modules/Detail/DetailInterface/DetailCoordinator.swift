@@ -1,6 +1,6 @@
 import SwiftUI
 import MainListInterface
 
-public protocol DetailFactory {
+public protocol DetailCoordinator {
     @MainActor func makeDetailView(for product: Product) -> AnyView
 }

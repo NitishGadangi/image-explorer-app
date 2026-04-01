@@ -2,6 +2,11 @@ import XCTest
 import Foundation
 @testable import PersistenceLib
 
+struct TestModel: Codable, Equatable {
+    let name: String
+    let value: Int
+}
+
 final class UserDefaultsDataStoreTests: XCTestCase {
 
     private var store: UserDefaultsDataStore!
@@ -12,28 +17,39 @@ final class UserDefaultsDataStoreTests: XCTestCase {
     }
 
     func testSaveAndLoad() throws {
-        let data = "hello".data(using: .utf8)!
-        try store.save(data, forKey: "test")
-        let loaded = try store.load(forKey: "test")
-        XCTAssertEqual(loaded, data)
+        let model = TestModel(name: "hello", value: 1)
+        try store.save(model, forKey: "test")
+        let loaded: TestModel? = try store.load(forKey: "test")
+        XCTAssertEqual(loaded, model)
     }
 
     func testLoadReturnsNilForMissingKey() throws {
-        let loaded = try store.load(forKey: "nonexistent")
+        let loaded: TestModel? = try store.load(forKey: "nonexistent")
         XCTAssertNil(loaded)
     }
 
     func testDeleteRemovesData() throws {
-        let data = "hello".data(using: .utf8)!
-        try store.save(data, forKey: "test")
+        let model = TestModel(name: "hello", value: 1)
+        try store.save(model, forKey: "test")
         try store.delete(forKey: "test")
-        XCTAssertNil(try store.load(forKey: "test"))
+        let loaded: TestModel? = try store.load(forKey: "test")
+        XCTAssertNil(loaded)
     }
 
     func testExistsReturnsCorrectValue() throws {
         XCTAssertFalse(store.exists(forKey: "test"))
-        try store.save("data".data(using: .utf8)!, forKey: "test")
+        try store.save(TestModel(name: "x", value: 0), forKey: "test")
         XCTAssertTrue(store.exists(forKey: "test"))
+    }
+
+    func testSaveAndLoadArray() throws {
+        let models = [
+            TestModel(name: "a", value: 1),
+            TestModel(name: "b", value: 2),
+        ]
+        try store.save(models, forKey: "models")
+        let loaded: [TestModel]? = try store.load(forKey: "models")
+        XCTAssertEqual(loaded, models)
     }
 }
 
@@ -47,11 +63,6 @@ final class DefaultPersistenceServiceTests: XCTestCase {
         service = DefaultPersistenceService(store: store)
     }
 
-    struct TestModel: Codable, Equatable {
-        let name: String
-        let value: Int
-    }
-
     func testSaveAndLoadCodableObject() throws {
         let model = TestModel(name: "test", value: 42)
         try service.save(model, forKey: "model")
@@ -62,16 +73,6 @@ final class DefaultPersistenceServiceTests: XCTestCase {
     func testLoadReturnsNilForMissingKey() throws {
         let loaded: TestModel? = try service.load(forKey: "missing")
         XCTAssertNil(loaded)
-    }
-
-    func testSaveAndLoadArray() throws {
-        let models = [
-            TestModel(name: "a", value: 1),
-            TestModel(name: "b", value: 2),
-        ]
-        try service.save(models, forKey: "models")
-        let loaded: [TestModel]? = try service.load(forKey: "models")
-        XCTAssertEqual(loaded, models)
     }
 
     func testDeleteRemovesPersistedData() throws {
